@@ -35,3 +35,32 @@
     completed <span class="todo-done-label">{doneLabel}</span>
   </a>
 </script>
+
+<script src="http://yui.yahooapis.com/3.18.1/build/yui/yui-min.js"></script>
+
+<script>
+  YUI().use('event-focus', 'json', 'model', 'model-list', 'view', function (Y) {
+    var TodoAppView, TodoList, TodoModel, TodoView;
+
+    // ToDo Model
+    TodoModel = Y.TodoModel = Y.Base.create('todoModel', Y.Model, [], {
+      sync: LocalStorageSync('todo'),
+
+      toggleDone: function () {
+        this.set('done', !this.get('done')).save();
+      }
+    }, {
+      ATTRS: {
+        done: { value: false },
+        text: { value: ''}
+      }
+    });
+
+    // TodoList class
+
+    // TodoAppView view controller
+
+    // TodoView UI interaction class
+
+  });
+</script>
