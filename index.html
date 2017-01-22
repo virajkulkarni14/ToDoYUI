@@ -57,6 +57,23 @@
     });
 
     // TodoList class
+    TodoList = Y.TodoList = Y.Base.create('todoList', Y.ModelList, [], {
+      model: TodoModel,
+
+      sync: LocalStorageSync('todo'),
+
+      done: function() {
+        return this.filter(function (model) {
+          return model.get('done');
+        });
+      },
+
+      remaining: function () {
+        return this.filter(function (model) {
+          return !model.get('done');
+        });
+      }
+    });
 
     // TodoAppView view controller
 
