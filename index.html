@@ -1,9 +1,25 @@
 <!-- This is the main container and "shell" for the todo app. -->
 <div id="todo-app">
-    <label class="todo-label" for="new-todo">What do you want to do today?</label>
-    <input type="text" id="new-todo" class="todo-input"
-        placeholder="finish code">
+  <label class="todo-label" for="new-todo">What do you want to do today?</label>
+  <input type="text" id="new-todo" class="todo-input"
+      placeholder="finish code">
 
-    <ul id="todo-list"></ul>
-    <div id="todo-stats"></div>
+  <ul id="todo-list"></ul>
+  <div id="todo-stats"></div>
 </div>
+
+<!-- This template HTML will render each todo item. -->
+<script type="text/x-template">
+  <div class="todo-view">
+    <input type="checkbox" class="todo-checkbox" {checked}>
+    <span class="todo-content" tabindex="0">{text}</span>
+  </div>
+
+  <div class="todo-edit">
+    <input type="text" class="todo-input" value="{text}">
+  </div>
+
+  <a href="#" class="todo-remove" title="Remove this task">
+    <span class="todo-remove-icon"></span>
+  </a>
+</script>
