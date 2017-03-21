@@ -271,4 +271,57 @@ TodoView = Y.TodoView = Y.Base.create('todoView', Y.View, [], {
   }
 });
 
+function LocalStorageKey(key) {
+  var localStorage;
+
+  if (!key) {
+    Y.error('No storage key specified.');
+  }
+
+  if (Y.config.win.localStorage) {
+    localStorage = Y.config.win.localStorage;
+  }
+
+  var data = Y.JSON.parse((localStorage && localStorage.getItem(key)) || '{}');
+
+  function destroy(id) {
+    var modelHash;
+
+    if ((modelHash = data[id])) {
+      delete data[id];
+      save();
+    }
+
+    return modelHash;
+  }
+
+  function generateId() {
+    var id = '',
+        i  = 4;
+
+    while (i--) {
+      id += (((1 + Math.random()) * 0x10000 | 0).toString(16).substring(1));
+    }
+
+    return id;
+  }
+
+  function get(id) {
+    return id ? data[id] : Y.Object.values(data);
+  }
+
+  function save() {
+    localStorage && localStorage.setItem(key, Y.JSON.stringify(data));
+  }
+
+  function set(model) {
+    var hash        = model.toJSON(),
+        idAttribute = model.idAttribute;
+
+    if (!Y.Lang.isValue(hash[idAttribute])) {
+      hash[idAttribute] = generateId();
+    }
+  }
+}
+
 </script>
